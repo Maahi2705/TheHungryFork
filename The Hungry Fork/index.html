@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Hungry Fork</title>
+  <link rel="icon" type="image/jpg" href="favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Lato', sans-serif; }
+
+    /* ── Page visibility ── */
+    #menuPage,
+    #aboutPage { display: none; }
+
+    /* ── Navbar active link ── */
+    .nav-link.active-page { color: #ff6b6b !important; border-bottom: 2px solid #ff6b6b; }
+
+    /* ── Carousel ── */
+    .carousel-item img { height: 450px; object-fit: cover; }
+
+    /* ── Menu Page ── */
+    .menu-heading {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 50px;
+      margin-top: 30px;
+      color: darkred;
+    }
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px;
+    }
+    .menu-box {
+      background: rgba(255,255,255,0.93);
+      width: 280px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    }
+    .menu-box h2 { text-align: center; color: darkred; margin-bottom: 15px; }
+    .menu-box ul { list-style: none; padding: 0; }
+    .menu-box li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 17px;
+      transition: background 0.2s;
+    }
+    .menu-box li:hover { background-color: antiquewhite; }
+    .menu-images { text-align: center; margin-bottom: 40px; }
+    .menu-images img {
+      width: 250px; height: 180px;
+      object-fit: cover; border-radius: 15px; margin: 10px;
+    }
+    .menu-bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100vh;
+      object-fit: cover; z-index: -1;
+    }
+
+    /* ── About Page ── */
+    #aboutPage { background-color: #fff8f0; }
+    #aboutPage h1 {
+      font-family: 'Playfair Display', serif;
+      color: darkred;
+      font-weight: bold;
+    }
+    #aboutPage h2 { color: darkred; font-family: 'Playfair Display', serif; }
+
+    /* ── Cards uniform image height ── */
+    .card-img-top { height: 200px; object-fit: cover; }
+
+    /* ── Footer ── */
+    footer {
+      background: #1a1a1a;
+      color: #ccc;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+    footer a { color: #ff6b6b; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="logo" width="40" height="40">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#" onclick="showPage('home')">The Hungry Fork</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#demo">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="demo">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" id="nav-home"  onclick="showPage('home')">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="nav-menu"  onclick="showPage('menu')">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="nav-about" onclick="showPage('about')">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" id="nav-reviews" onclick="showPage('reviews')">Reviews</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════ HOME PAGE ══════════════ -->
+  <div id="homePage">
+
+    <!-- Hero -->
+    <div class="container-fluid text-center p-5"
+      style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&auto=format&fit=crop');
+             background-size: cover; background-position: center; min-height: 500px;">
+      <h1 class="display-1 fw-bold"
+          style="font-family:'Playfair Display',serif; color:white; padding-top:120px; text-shadow:2px 2px 8px black;">
+        Welcome to The Hungry Fork
+      </h1>
+      <p class="fs-3 fw-semibold text-white">Delicious food served everyday</p>
+    </div>
+
+    <!-- Description -->
+    <p class="text-center" style="background-color:beige; font-size:20px; padding:8% 12%;">
+      Experience the perfect blend of taste and tradition at <strong>The Hungry Fork</strong>, where every
+      meal is crafted with passion and served with warmth. Whether you're looking for a hearty breakfast,
+      a delightful lunch, or an evening coffee, we've got something to satisfy your cravings. Visit us today
+      and indulge in a unique culinary journey.
+    </p>
+
+    <!-- Carousel -->
+    <div id="foodCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000" data-bs-pause="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&auto=format&fit=crop" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&fit=crop" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&auto=format&fit=crop" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=1200&auto=format&fit=crop" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1200&auto=format&fit=crop" class="d-block w-100">
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialities -->
+    <div class="container mt-5 mb-5">
+      <h2 class="text-center mb-4" style="font-family:'Playfair Display',serif;">Our Specialities</h2>
+      <div class="row">
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">Pizza</h4>
+              <p class="card-text">Cheesy pizza loaded with fresh toppings.</p>
+            
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">Burger</h4>
+              <p class="card-text">Juicy burger with crispy patty and cheese.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&auto=format&fit=crop" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">Pasta</h4>
+              <p class="card-text">Creamy white sauce pasta with herbs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">Sandwich</h4>
+              <p class="card-text">Grilled sandwich with fresh veggies.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&auto=format&fit=crop" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">Fries</h4>
+              <p class="card-text">Crispy golden french fries with dip.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop" class="card-img-top">
+            <div class="card-body">
+              <h4 class="card-title">Fried Rice</h4>
+              <p class="card-text">Fried rice with crunchy veggies.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- ══════════════ END HOME PAGE ══════════════ -->
+
+
+  <!-- ══════════════ MENU PAGE ══════════════ -->
+  <div id="menuPage">
+
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&auto=format&fit=crop" class="menu-bg" alt="">
+
+    <h1 class="menu-heading">OUR MENU</h1>
+
+    <div class="menu-container">
+
+      <div class="menu-box">
+        <h2>🍕 Pizza</h2>
+        <ul>
+          <li>Margherita Pizza</li>
+          <li>Farmhouse Pizza</li>
+          <li>Paneer Tikka Pizza</li>
+          <li>Cheese Burst Pizza</li>
+          <li>Veggie Supreme Pizza</li>
+          <li>Mexican Green Wave</li>
+          <li>Double Cheese Pizza</li>
+        </ul>
+      </div>
+
+      <div class="menu-box">
+        <h2>🍔 Burgers</h2>
+        <ul>
+          <li>Veg Burger</li>
+          <li>Cheese Burger</li>
+          <li>Paneer Burger</li>
+          <li>Double Patty Burger</li>
+          <li>Spicy Mexican Burger</li>
+          <li>Crispy Burger</li>
+          <li>Loaded Burger</li>
+        </ul>
+      </div>
+
+      <div class="menu-box">
+        <h2>🍝 Pasta</h2>
+        <ul>
+          <li>White Sauce Pasta</li>
+          <li>Red Sauce Pasta</li>
+          <li>Pink Sauce Pasta</li>
+          <li>Cheesy Alfredo Pasta</li>
+          <li>Spicy Arrabiata Pasta</li>
+          <li>Mac &amp; Cheese</li>
+        </ul>
+      </div>
+
+      <div class="menu-box">
+        <h2>🥡 Chinese</h2>
+        <ul>
+          <li>Veg Fried Rice</li>
+          <li>Hakka Noodles</li>
+          <li>Schezwan Noodles</li>
+          <li>Spring Rolls</li>
+          <li>Manchurian</li>
+          <li>Chilli Paneer</li>
+        </ul>
+      </div>
+
+      <div class="menu-box">
+        <h2>🍟 Starters</h2>
+        <ul>
+          <li>French Fries</li>
+          <li>Peri Peri Fries</li>
+          <li>Garlic Bread</li>
+          <li>Cheese Balls</li>
+          <li>Nachos</li>
+          <li>Onion Rings</li>
+        </ul>
+      </div>
+
+      <div class="menu-box">
+        <h2>🥤 Drinks</h2>
+        <ul>
+          <li>Cold Coffee</li>
+          <li>Oreo Shake</li>
+          <li>Chocolate Milkshake</li>
+          <li>Mojito</li>
+          <li>Lemon Soda</li>
+          <li>Soft Drinks</li>
+        </ul>
+      </div>
+
+      <div class="menu-box">
+        <h2>🍰 Desserts</h2>
+        <ul>
+          <li>Brownie</li>
+          <li>Chocolate Lava Cake</li>
+          <li>Ice Cream</li>
+          <li>Cheese Cake</li>
+          <li>Donuts</li>
+          <li>Waffles</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="menu-images">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop" alt="Pizza">
+      <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop" alt="Burger">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600&auto=format&fit=crop" alt="Food">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop" alt="Salad">
+    </div>
+
+  </div>
+  <!-- ══════════════ END MENU PAGE ══════════════ -->
+
+
+  <!-- ══════════════ ABOUT PAGE ══════════════ -->
+  <div id="aboutPage" class="container-fluid py-5">
+
+    <div class="container">
+
+      <h1 class="text-center mb-5">About The Hungry Fork 🍴</h1>
+
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6 mb-4">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&auto=format&fit=crop"
+               class="img-fluid rounded shadow" alt="Restaurant Interior">
+        </div>
+        <div class="col-md-6">
+          <h2>Welcome to The Hungry Fork!</h2>
+          <p style="font-size:18px; line-height:1.8;">
+            At <b>The Hungry Fork</b>, food is more than just a meal — it's an experience.
+            We bring together delicious flavours, fresh ingredients, and warm hospitality
+            to create unforgettable moments for every guest.
+          </p>
+          <p style="font-size:18px; line-height:1.8;">
+            From cheesy pizzas and juicy burgers to creamy pasta, refreshing drinks,
+            and mouth-watering desserts, our menu is crafted to satisfy every craving.
+          </p>
+          <p style="font-size:18px; line-height:1.8;">
+            Whether you're here for a family dinner, a coffee break with friends,
+            a quick snack, or a special celebration, The Hungry Fork promises
+            great food, cozy vibes, and happy memories.
+          </p>
+          <button class="btn btn-danger btn-lg mt-3" onclick="showPage('menu')">
+            Explore Our Menu 🍽️
+          </button>
+        </div>
+      </div>
+
+      <!-- Why Choose Us -->
+      <h2 class="text-center mb-4">Why Choose Us?</h2>
+      <div class="row text-center mb-5">
+        <div class="col-md-3 mb-3">
+          <div class="p-4 rounded shadow-sm" style="background:#fff;">
+            <div style="font-size:40px;">🌿</div>
+            <h5 class="mt-2 fw-bold">Fresh Ingredients</h5>
+            <p class="text-muted">We source fresh, quality ingredients daily for every dish.</p>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="p-4 rounded shadow-sm" style="background:#fff;">
+            <div style="font-size:40px;">👨‍🍳</div>
+            <h5 class="mt-2 fw-bold">Expert Chefs</h5>
+            <p class="text-muted">Our skilled chefs craft every meal with love and expertise.</p>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="p-4 rounded shadow-sm" style="background:#fff;">
+            <div style="font-size:40px;">🏠</div>
+            <h5 class="mt-2 fw-bold">Cozy Ambience</h5>
+            <p class="text-muted">Warm, welcoming spaces perfect for every occasion.</p>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="p-4 rounded shadow-sm" style="background:#fff;">
+            <div style="font-size:40px;">💰</div>
+            <h5 class="mt-2 fw-bold">Pocket Friendly</h5>
+            <p class="text-muted">Great food at prices that won't break the bank.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location & Hours -->
+      <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+          <div class="p-4 rounded shadow-sm h-100" style="background:#fff;">
+            <h4>📍 Find Us</h4>
+            <p class="text-muted mb-1">123, Food Street, Koregaon Park</p>
+            <p class="text-muted mb-1">Pune, Maharashtra – 411001</p>
+            <p class="text-muted">📞 +91 98765 43210</p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="p-4 rounded shadow-sm h-100" style="background:#fff;">
+            <h4>🕐 Opening Hours</h4>
+            <p class="text-muted mb-1">Monday – Friday: 10:00 AM – 11:00 PM</p>
+            <p class="text-muted mb-1">Saturday – Sunday: 9:00 AM – 11:30 PM</p>
+            <p class="text-muted">Public Holidays: 10:00 AM – 10:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ══════════════ END ABOUT PAGE ══════════════ -->
+
+
+  <!-- ══════════════ REVIEWS PAGE ══════════════ -->
+  <div id="reviewsPage" style="display:none; background-color:#fff8f0;">
+    <div class="container py-5">
+
+      <h1 class="text-center mb-5" style="font-family:'Playfair Display',serif; color:darkred;">
+        What Our Guests Say ⭐
+      </h1>
+
+      <div class="row">
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 p-3">
+            <div style="font-size:24px; color:#f5a623;">★★★★★</div>
+            <p class="mt-3">"Absolutely loved the Paneer Tikka Pizza! The flavours were spot on and the ambience was so cozy. Will definitely come back!"</p>
+            <p class="fw-bold mb-0">— Priya S., Pune</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 p-3">
+            <div style="font-size:24px; color:#f5a623;">★★★★★</div>
+            <p class="mt-3">"Best burgers in the city, no cap. The Double Patty Burger is a must-try. Great service and very pocket-friendly."</p>
+            <p class="fw-bold mb-0">— Rohan M., Pune</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 p-3">
+            <div style="font-size:24px; color:#f5a623;">★★★★☆</div>
+            <p class="mt-3">"The pasta and cold coffee combo is everything. Perfect place for a casual outing with friends. Loved the vibe!"</p>
+            <p class="fw-bold mb-0">— Sneha K., Mumbai</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 p-3">
+            <div style="font-size:24px; color:#f5a623;">★★★★★</div>
+            <p class="mt-3">"Chocolate Lava Cake deserves a standing ovation. The whole family enjoyed the meal. Highly recommended for family dinners!"</p>
+            <p class="fw-bold mb-0">— Amit T., Nashik</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 p-3">
+            <div style="font-size:24px; color:#f5a623;">★★★★★</div>
+            <p class="mt-3">"Fresh ingredients, quick service, and amazing food. The Schezwan Noodles were spicy perfection!"</p>
+            <p class="fw-bold mb-0">— Kavya R., Pune</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 p-3">
+            <div style="font-size:24px; color:#f5a623;">★★★★☆</div>
+            <p class="mt-3">"Very good food and reasonable prices. The garlic bread and cheese balls make for a perfect starter combo!"</p>
+            <p class="fw-bold mb-0">— Dev P., Pune</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- ══════════════ END REVIEWS PAGE ══════════════ -->
+
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <p class="mb-1">🍴 <strong style="color:white;">The Hungry Fork</strong> — Taste The Happiness</p>
+    <p class="mb-1">123, Food Street, Koregaon Park, Pune – 411001 &nbsp;|&nbsp; 📞 +91 98765 43210</p>
+    <p class="mb-0" style="color:#888;">© 2025 The Hungry Fork. All rights reserved.</p>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const pages = ['home', 'menu', 'about', 'reviews'];
+
+    function showPage(page) {
+      // Hide all pages
+      document.getElementById('homePage').style.display    = 'none';
+      document.getElementById('menuPage').style.display    = 'none';
+      document.getElementById('aboutPage').style.display   = 'none';
+      document.getElementById('reviewsPage').style.display = 'none';
+
+      // Remove active highlight from all nav links
+      pages.forEach(p => {
+        const el = document.getElementById('nav-' + p);
+        if (el) el.classList.remove('active-page');
+      });
+
+      // Show requested page
+      if (page === 'home')    document.getElementById('homePage').style.display    = 'block';
+      if (page === 'menu')    document.getElementById('menuPage').style.display    = 'block';
+      if (page === 'about')   document.getElementById('aboutPage').style.display   = 'block';
+      if (page === 'reviews') document.getElementById('reviewsPage').style.display = 'block';
+
+      // Highlight active nav link
+      const activeNav = document.getElementById('nav-' + pae);
+      if (activeNav) activeNav.classList.add('active-page');
+
+      window.scrollTo(0, 0);
+    }
+
+    // Start on home page
+    showPage('home');
+  </script>
+
+</body>
+</html>
